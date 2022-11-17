@@ -2,53 +2,98 @@ using System;
 using System.Collections.Generic;
 public class Partie
 {
-    public List<string> lettrePropose = new List<string>();
-    public void PartieEnCours()
+    public List<string> lettrePropose = new List<string>(); // nouvelle liste mot
+    public int nmbrEssaie = 0;
+    public int essaieMax = 10;
+    public int affichagePendu;
+    public string motADeviner;
+    public int essaieRestant
     {
-        bool SaisieCorrecte(string saisieJoueur)
+        get
         {
-            string motADeviner = Mot.MotRnd();
+            return essaieMax - nmbrEssaie;
+        }
+    }
+    public int afficherLettreDevine;
+    public int afficherLettrePropose; 
+    public GameManager gameManager;
+    bool partieGagnee // bool verif partie gagnee
+    {
+        get
+        {
+            for (int i = 0; i < motADeviner.Length; i++)
+            {
+                if (!lettrePropose.Contains(motADeviner[i].ToString()))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    public Partie(GameManager gameManager) // lancement
+    {
+        this.gameManager = gameManager;
+        gameManager.partieEnCours = this;
+        BouclePrincipale(); // entree en boucle principale
+    }
+    public void BouclePrincipale() // boucle principale
+    {
+        Console.Clear(); // clear
+        gameManager.affichagePendu.AfficherEcran(this); 
+        bool partie = true;
+        motADeviner = Mot.MotRnd(); // mot a deviner
+        int incorrect;
+        bool SaisieCorrecte(string saisieJoueur) // sasie correcte
+        {
+            //string motADeviner = Mot.MotRnd();
             return Char.IsLetter(saisieJoueur[0]);
         }
-
-        bool partie = true;
-        string motADeviner = Mot.MotRnd();
-        Console.WriteLine("[Propose une Lettre pour deviner le mot ou écrit le mot directement.]");
-        Console.WriteLine("debug.Le mot a deviner est : " + motADeviner);
-
         while (partie == true)
         {
-            string saisieJoueur = Console.ReadLine();
-            bool saisieCorrecte = SaisieCorrecte(saisieJoueur);
-            Console.WriteLine("[Vous avez saisie : " + (saisieJoueur) + ".]");
-
-            if (saisieCorrecte)
+            if (partieGagnee) // verif partie gagnee
             {
-                if (motADeviner.Contains(saisieJoueur))
-                {
-                    Console.WriteLine("[Bien joué ! Le mot a deviner contien cette lettre.]");
-                    Console.WriteLine("[Lettre(s) déjà jouée(s) : " + lettrePropose + ".]");
-                }
-                else
-                {
-                    Console.WriteLine("[Dommage.. Le mot a deviner ne contien pas cette lettre.]");
-                    Console.WriteLine("[Lettre(s) déjà jouée(s) : " + lettrePropose + ".]");
-                }
+                gameManager.affichagePendu.AfficherEcranGagnée(this);
+            }
+            gameManager.affichagePendu.AfficherInfoPartie(this);
+            string saisieJoueur = Console.ReadLine();
+            gameManager.affichagePendu.AfficherMessage("", ConsoleColor.White);
+            gameManager.affichagePendu.AfficherMessage("|J'ai saisi : " + saisieJoueur + ".|", ConsoleColor.White);
+            bool saisieCorrecte = SaisieCorrecte(saisieJoueur);
+            if ((saisieJoueur.Length) > 1)
+            {
+                saisieCorrecte = false;
+            }
+            else if (Int32.TryParse(saisieJoueur, out incorrect)) // sasie correcte
+            {
+                saisieCorrecte = false;
+            }
+            if (saisieCorrecte == false)
+            {
+                gameManager.affichagePendu.AfficherMessage("|La saisie est incorrect..|", ConsoleColor.Yellow); // message erreur
+            }
+            else if (saisieCorrecte)
+            {
                 if (!lettrePropose.Contains(saisieJoueur))
                 {
                     lettrePropose.Add(saisieJoueur);
                 }
-                if (saisieJoueur == motADeviner)
+                if (!motADeviner.Contains(saisieJoueur))
                 {
-                    Console.WriteLine("[Le mot a deviner étais bien : " + motADeviner + ".]");
-                    partie = false;
+                    nmbrEssaie++; // -1 essaie
+                    gameManager.affichagePendu.AfficherMessage("|Dommage ! Le mot a deviner ne contien pas cette lettre.|", ConsoleColor.Red); // lettre non valide
+                }
+                if (motADeviner.Contains(saisieJoueur))
+                {
+                    gameManager.affichagePendu.AfficherMessage("|Bien joué ! Le mot a deviner contien bien la lettre : " + saisieJoueur + " .|", ConsoleColor.Green); // affichage lettre valide
+                }
+                if (nmbrEssaie == essaieMax) // plus d'essaies
+                {
+                    gameManager.affichagePendu.AfficherEcranPerdue(this); // affichage perdu
                 }
             }
-
-            else
-            {
-                Console.WriteLine("[La saisie est incorrecte..]");
-            }
+            System.Threading.Thread.Sleep(750); // latence
         }
+        BouclePrincipale(); // retour dand la boucle principale
     }
 }

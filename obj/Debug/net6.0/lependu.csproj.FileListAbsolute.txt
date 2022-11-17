@@ -28,3 +28,18 @@ C:\Users\sebas\Desktop\vs\lependu\obj\Debug\net6.0\refint\lependu.dll
 C:\Users\sebas\Desktop\vs\lependu\obj\Debug\net6.0\lependu.pdb
 C:\Users\sebas\Desktop\vs\lependu\obj\Debug\net6.0\lependu.genruntimeconfig.cache
 C:\Users\sebas\Desktop\vs\lependu\obj\Debug\net6.0\ref\lependu.dll
+C:\Users\sebas\Desktop\vs\lependu copie\bin\Debug\net6.0\lependu.exe
+C:\Users\sebas\Desktop\vs\lependu copie\bin\Debug\net6.0\lependu.deps.json
+C:\Users\sebas\Desktop\vs\lependu copie\bin\Debug\net6.0\lependu.runtimeconfig.json
+C:\Users\sebas\Desktop\vs\lependu copie\bin\Debug\net6.0\lependu.dll
+C:\Users\sebas\Desktop\vs\lependu copie\bin\Debug\net6.0\lependu.pdb
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.csproj.AssemblyReference.cache
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.AssemblyInfoInputs.cache
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.AssemblyInfo.cs
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.csproj.CoreCompileInputs.cache
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.dll
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\refint\lependu.dll
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.pdb
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\lependu.genruntimeconfig.cache
+C:\Users\sebas\Desktop\vs\lependu copie\obj\Debug\net6.0\ref\lependu.dll

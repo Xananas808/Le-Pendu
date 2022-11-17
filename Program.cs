@@ -1,8 +1,7 @@
 ﻿public class Program
 {
-    static void Main(string[] agrs)
+    static void Main(string[] agrs) // point d'entre
     {
-        Partie partieEnCours = new Partie();
-        partieEnCours.PartieEnCours();
+        new GameManager();
     }
 }
